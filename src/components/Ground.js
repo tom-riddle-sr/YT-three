@@ -1,6 +1,6 @@
 import { usePlane } from "@react-three/cannon"
 import { groundTexture } from "../images/textures"
-import { NearestFilter, RepeatWrapping } from "three"
+import { useStore } from "../hooks/useStore";
 
 export const Ground = () => {
 
@@ -8,13 +8,21 @@ export const Ground = () => {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0], position: [0, -0.5, 0]
   }))
-  groundTexture.magFilter = NearestFilter //texture 放大過濾器,控制放大時的渲染效果
-  groundTexture.wrapS = RepeatWrapping //Ｓ軸(水平方向)
-  groundTexture.wrapT = RepeatWrapping //Y軸(垂直方向)
   groundTexture.repeat.set(100, 100)
 
+  const [addCube] = useStore((state) => [state.addCube])
+
   return (
-    <mesh ref={ref}>
+    <mesh
+      ref={ref}
+      onClick={(e) => {
+        e.stopPropagation() //控制事件處理的範圍，確保特定元素上的事件處理不會影響到其他元素。
+        const [x, y, z] = Object.values(e.point).map(val => Math.ceil(val));
+        // ceil:將數字向上取整到最接近的整數 Math.ceil(-3.8) 將得到 -3
+        // floor:將數字向上取整到最接近的整數 Math.floor(-3.8) 將得到 -4
+        addCube(x, y, z)
+      }}
+    >
       <planeGeometry attach='geometry' args={[100, 100]} />
       <meshStandardMaterial attach='material' map={groundTexture} />
     </mesh>

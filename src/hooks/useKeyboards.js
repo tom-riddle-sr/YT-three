@@ -16,7 +16,6 @@ function actionByKey(key) {
   return keyActionMap[key]
 }
 
-
 export const useKeyboard = () => {
   const [actions, setActions] = useState({
     moveForward: false,
@@ -32,11 +31,10 @@ export const useKeyboard = () => {
   })
 
   const handleKeydown = useCallback((e) => {
-    const action = actionByKey[e.code]
+    const action = actionByKey(e.code)
     //set useState的方式 先展開過去的prev
     // a:true 新增一個屬性,如果是已經存在的就是更新
     // [a]:true 透過參數,動態新增一個屬性
-    console.log(e)
     if (action) {
       setActions((prev) => {
         return ({
@@ -45,11 +43,10 @@ export const useKeyboard = () => {
         })
       })
     }
-    // console.log(e.code)
   }, [])
 
   const handleKeyup = useCallback((e) => {
-    const action = actionByKey[e.code]
+    const action = actionByKey(e.code)
     if (action) {
       setActions((prev) => {
         return ({
@@ -58,7 +55,6 @@ export const useKeyboard = () => {
         })
       })
     }
-    // console.log(e.code)
 
   }, [])
   useEffect(() => {
