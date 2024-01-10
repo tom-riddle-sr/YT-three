@@ -47,7 +47,20 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation: aa 1s steps(2) infinite forwards;
+
 }
+
+@keyframes aa {
+  0% {
+    font-size: 20px;
+  }
+
+  100% {
+    font-size: 80px;
+  }
+}
+
 .cursor {
   color: white;
 }

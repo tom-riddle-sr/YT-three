@@ -15,13 +15,15 @@ const glassTexture = new TextureLoader().load(glassImg)
 const woodTexture = new TextureLoader().load(woodImg)
 const groundTexture = new TextureLoader().load(grassImg)
 
-dirtTexture.magFilter = NearestFilter;
+// magFilter:定義紋理被放大時的過濾器設置
+
+dirtTexture.magFilter = NearestFilter; //採用最近像素的顏色放大紋理
 logTexture.magFilter = NearestFilter;
 grassTexture.magFilter = NearestFilter;
 glassTexture.magFilter = NearestFilter;
 woodTexture.magFilter = NearestFilter;
 groundTexture.magFilter = NearestFilter;
-groundTexture.wrapS = RepeatWrapping
+groundTexture.wrapS = RepeatWrapping //超出圖片大小後要長怎樣
 groundTexture.wrapT = RepeatWrapping
 
 export {
