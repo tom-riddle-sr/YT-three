@@ -6,7 +6,6 @@ export const Cubes = () => {
     [
       state.cubes,
     ])
-
   return cubes.map(({ key, pos, texture }) => {
     return (
       <Cube key={key} position={pos} texture={texture} />
