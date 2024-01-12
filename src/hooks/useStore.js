@@ -42,9 +42,8 @@ export const useStore = create((set) => ({
   },
 
   resetWorld: () => {
-    // set(() => ({
-    //   cubes: []
-    // }))
-
+    set(() => ({
+      cubes: []
+    }))
   },
 }))
