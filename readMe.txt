@@ -19,6 +19,9 @@ yarn add @react-spring/three
 🧠 @react-three/drei
 three.js的補充庫,提供工具、組建等
 
+🧠 ＠Poimandres
+https://gltf.pmnd.rs/
+
 🧠 zustand
 狀態管理工具
 
