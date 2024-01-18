@@ -25,7 +25,7 @@ export function ScrollPikachu2(props) {
 
   return (
     <>
-      <group ref={group1} {...props} dispose={null} >
+      <group ref={group1} {...props} dispose={null} styles>
         <group name="Scene">
           <group name="Pikachu" rotation={[Math.PI / 2, 0, 0]} scale={0.025}>
             <group name="PikachuM" >
@@ -64,7 +64,7 @@ export function ScrollPikachu2(props) {
           <group name="Sun" />
         </group>
       </group>
-      <Html><button style={{ background: "pink", margin: "20px" }} onClick={
+      <Html><button onClick={
         aa
       }>按我</button></Html>
     </>

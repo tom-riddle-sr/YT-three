@@ -71,7 +71,45 @@ export function ScrollPikachu3(props) {
 
   return (
     <>
-
+      <group ref={group} {...props} dispose={null}>
+        <group name="Scene">
+          <group name="Pikachu" rotation={[Math.PI / 2, 0, 0]} scale={0.2}>
+            <group name="PikachuM" >
+              {/* 全部 */}
+              <skinnedMesh
+                castShadow receiveShadow
+                name="PikachuM_1"
+                geometry={nodes.PikachuM_1.geometry}
+                material={materials["Material 160"]}
+                skeleton={nodes.PikachuM_1.skeleton}
+              />
+              {/*腮紅*/}
+              <skinnedMesh
+                name="PikachuM_2"
+                geometry={nodes.PikachuM_2.geometry}
+                material={materials["Material.001"]}
+                skeleton={nodes.PikachuM_2.skeleton}
+              />
+              {/*嘴巴*/}
+              <skinnedMesh
+                name="PikachuM_3"
+                geometry={nodes.PikachuM_3.geometry}
+                material={materials["Material.003"]}
+                skeleton={nodes.PikachuM_3.skeleton}
+              />
+              {/*眼睛*/}
+              <skinnedMesh
+                name="PikachuM_4"
+                geometry={nodes.PikachuM_4.geometry}
+                material={materials["Material.002"]}
+                skeleton={nodes.PikachuM_4.skeleton}
+              />
+            </group>
+            <primitive object={nodes.pm0025_00_pikachu} />
+          </group>
+          <group name="Sun" />
+        </group>
+      </group>
 
 
       <Html><button onClick={
