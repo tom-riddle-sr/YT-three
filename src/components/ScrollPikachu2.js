@@ -1,14 +1,12 @@
 
-// 完成使用3D模型,一步到位的移動
-
 import React, { useRef, useMemo, useCallback } from "react";
 import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import { MeshStandardMaterial, MeshLambertMaterial, MeshMatcapMaterial, Euler } from 'three';
 
 export function ScrollPikachu2(props) {
-  const group = useRef();
+  const group1 = useRef();
   const { nodes, materials, animations } = useGLTF("/pikachu/source/pikachu2.glb");
-  const { actions } = useAnimations(animations, group);
+  const { actions } = useAnimations(animations, group1);
 
 
   // const aa = useMemo(() => {
@@ -27,7 +25,7 @@ export function ScrollPikachu2(props) {
 
   return (
     <>
-      <group ref={group} {...props} dispose={null}>
+      <group ref={group1} {...props} dispose={null} >
         <group name="Scene">
           <group name="Pikachu" rotation={[Math.PI / 2, 0, 0]} scale={0.025}>
             <group name="PikachuM" >
@@ -66,7 +64,7 @@ export function ScrollPikachu2(props) {
           <group name="Sun" />
         </group>
       </group>
-      <Html><button onClick={
+      <Html><button style={{ background: "pink", margin: "20px" }} onClick={
         aa
       }>按我</button></Html>
     </>
