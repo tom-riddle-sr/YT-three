@@ -1,22 +1,17 @@
 
-// spring 動畫, 想要rotation有process
+// 想要rotation有process,耳朵做鐘擺運動
 
-import React, { useRef, useMemo, useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useGLTF, useAnimations, Html, Clone } from "@react-three/drei";
 import { MeshStandardMaterial, MeshLambertMaterial, MeshMatcapMaterial, Euler } from 'three';
 import { useSpring, animated } from '@react-spring/web'
 import { Canvas, useFrame } from "@react-three/fiber"
 
-
-
 export function ScrollPikachu3(props) {
-  const group = useRef();
-  const aa = useGLTF("/pikachu/source/pikachu2.glb");
+
   const { scene, nodes, materials, animations } = useGLTF("/pikachu/source/pikachu2.glb");
   const { ref, actions } = useAnimations(animations);
   const [a, setA] = useState(false)
-
-
 
   const findBones = () => {
     const indexOfLEar1 = nodes.PikachuM_1.skeleton.bones.findIndex((item) => item.name === "LEar1");
@@ -31,45 +26,19 @@ export function ScrollPikachu3(props) {
   };
 
   findBones()
-
-  const earBone = nodes.PikachuM_1.skeleton.bones[27]
-  const initEarBone = nodes.PikachuM_1.skeleton.bones[27].rotation
-  const springProps = useSpring({
-    from: { rotation: [0, 0, 0] },
-    to: { rotation: [0, Math.PI / 2, 0] },
-  });
-
-  useFrame(() => {
-    if (a) {
-      if (nodes.PikachuM_1.skeleton.bones[27].rotation.x > -1 && nodes.PikachuM_1.skeleton.bones[27].rotation.y < 1) {
-        nodes.PikachuM_1.skeleton.bones[27].rotation.x -= 0.03;
-        // nodes.PikachuM_1.skeleton.bones[27].rotation.x = -1;
-        nodes.PikachuM_1.skeleton.bones[27].rotation.y += 0.02;
-        // nodes.PikachuM_1.skeleton.bones[27].rotation.y = 1;
-
-
-      }
-    }
-  })
-  const initBoneX = nodes.PikachuM_1.skeleton.bones[27].rotation.x;
-  const initBoneY = nodes.PikachuM_1.skeleton.bones[27].rotation.y;
+  useEffect(() => void (actions.Walking.reset().play().paused = true), [])
 
   useFrame(() => {
     if (a) {
       const bone = nodes.PikachuM_1.skeleton.bones[27].rotation;
-
+      //鐘擺的運動通常是一種週期性擺動，它的振幅隨時間變化
       if (bone.x > -1 && bone.y < 1) {
-        bone.x = Math.sin(0.002) * 0.5;
-        bone.y = Math.cos(0.002) * 0.5;
+        bone.z = Math.cos(new Date() * 0.002) * 0.5;
+        bone.z = Math.sin(new Date() * 0.002) * 0.5;
       }
+      actions.Walking.paused = false;
     }
   });
-
-
-
-  const bb = () => {
-    setA(true)
-  }
 
   return (
     <>
@@ -112,13 +81,9 @@ export function ScrollPikachu3(props) {
           <group name="Sun" />
         </group>
       </group>
-      <Clone object={nodes.pm0025_00_pikachu} scale={0.03} rotation={[0, 0, 0]} />
-      {/*  <Clone object={nodes.pm0025_00_pikachu} scale={0.04} rotation={[0, 0, 0]}
-        position={[2, 0, 0]} /> */}
-
 
       <Html><button onClick={
-        bb
+        () => { setA(true) }
       }>按我</button></Html>
     </>
   );

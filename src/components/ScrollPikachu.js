@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations, useScroll, ScrollControls, OrbitControls, SoftShadows, Html } from "@react-three/drei"
 
+// 使用animation
 
 export const ScrollPikachu = (props) => {
 

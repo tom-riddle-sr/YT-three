@@ -1,7 +1,9 @@
 
 import React, { useRef, useMemo, useCallback } from "react";
 import { useGLTF, useAnimations, Html } from "@react-three/drei";
-import { MeshStandardMaterial, MeshLambertMaterial, MeshMatcapMaterial, Euler } from 'three';
+import { Euler } from 'three';
+
+//改變單個bone的屬性
 
 export function ScrollPikachu2(props) {
   const group1 = useRef();
@@ -13,7 +15,6 @@ export function ScrollPikachu2(props) {
   //   return new MeshStandardMaterial({ color: "pink" });
   // }, []);
 
-  console.log(nodes.LEar1)
   const aa = useCallback(() => {
     const newPosition = [50, 0, 0];
     // nodes.LEar1.position.set(...newPosition);

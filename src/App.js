@@ -85,14 +85,14 @@ function App() {
 
       <Canvas >
         <OrbitControls />
+        <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
         <ambientLight intensity={2} />
 
         {/* 第一个 Pikachu 在位置 [-2, 0, 0] */}
         {/* <ScrollPikachu2 position={[-2, -1, -2]} scale={1} /> */}
         {/* 第二个 Pikachu 在位置 [2, 0, 0] */}
-        {/* <ScrollPikachu3 position={[2, 0, 0]} scale={0.08} /> */}
+        <ScrollPikachu3 position={[2, 0, 0]} scale={0.08} />
         {/* <Clone1 /> */}
-        <OriginC />
       </Canvas>
 
 
