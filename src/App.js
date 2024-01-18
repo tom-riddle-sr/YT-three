@@ -10,7 +10,8 @@ import { ScrollGirl } from "./components/ScrollGirl"
 import { ScrollPikachu } from "./components/ScrollPikachu"
 import { ScrollPikachu2 } from "./components/ScrollPikachu2"
 import { ScrollPikachu3 } from "./components/ScrollPikachu3"
-import { Test } from "./components/Test"
+import { Clone1 } from "./components/Clone1"
+import { OriginC } from "./components/CloneAll/OriginC"
 
 import { useEffect, useRef } from "react"
 import { useGLTF, useAnimations, useScroll, ScrollControls, OrbitControls, SoftShadows, Sky, } from "@react-three/drei"
@@ -83,13 +84,15 @@ function App() {
     <>
 
       <Canvas >
+        <OrbitControls />
         <ambientLight intensity={2} />
 
         {/* 第一个 Pikachu 在位置 [-2, 0, 0] */}
-        <ScrollPikachu2 position={[-2, -1, -2]} scale={1} />
+        {/* <ScrollPikachu2 position={[-2, -1, -2]} scale={1} /> */}
         {/* 第二个 Pikachu 在位置 [2, 0, 0] */}
-        <ScrollPikachu3 position={[2, 0, 0]} scale={0.08} />
-
+        {/* <ScrollPikachu3 position={[2, 0, 0]} scale={0.08} /> */}
+        {/* <Clone1 /> */}
+        <OriginC />
       </Canvas>
 
 

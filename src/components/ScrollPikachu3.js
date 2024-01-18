@@ -2,7 +2,7 @@
 // spring 動畫, 想要rotation有process
 
 import React, { useRef, useMemo, useState, useCallback } from "react";
-import { useGLTF, useAnimations, Html } from "@react-three/drei";
+import { useGLTF, useAnimations, Html, Clone } from "@react-three/drei";
 import { MeshStandardMaterial, MeshLambertMaterial, MeshMatcapMaterial, Euler } from 'three';
 import { useSpring, animated } from '@react-spring/web'
 import { Canvas, useFrame } from "@react-three/fiber"
@@ -11,9 +11,11 @@ import { Canvas, useFrame } from "@react-three/fiber"
 
 export function ScrollPikachu3(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/pikachu/source/pikachu2.glb");
-  const { actions } = useAnimations(animations, group);
+  const aa = useGLTF("/pikachu/source/pikachu2.glb");
+  const { scene, nodes, materials, animations } = useGLTF("/pikachu/source/pikachu2.glb");
+  const { ref, actions } = useAnimations(animations);
   const [a, setA] = useState(false)
+
 
 
   const findBones = () => {
@@ -71,7 +73,48 @@ export function ScrollPikachu3(props) {
 
   return (
     <>
-
+      <group ref={ref} {...props} dispose={null}>
+        <group name="Scene">
+          <group name="Pikachu" rotation={[Math.PI / 2, 0, 0]} scale={0.2}>
+            <group name="PikachuM" >
+              {/* 全部 */}
+              <skinnedMesh
+                castShadow receiveShadow
+                name="PikachuM_1"
+                geometry={nodes.PikachuM_1.geometry}
+                material={materials["Material 160"]}
+                skeleton={nodes.PikachuM_1.skeleton}
+              />
+              {/*腮紅*/}
+              <skinnedMesh
+                name="PikachuM_2"
+                geometry={nodes.PikachuM_2.geometry}
+                material={materials["Material.001"]}
+                skeleton={nodes.PikachuM_2.skeleton}
+              />
+              {/*嘴巴*/}
+              <skinnedMesh
+                name="PikachuM_3"
+                geometry={nodes.PikachuM_3.geometry}
+                material={materials["Material.003"]}
+                skeleton={nodes.PikachuM_3.skeleton}
+              />
+              {/*眼睛*/}
+              <skinnedMesh
+                name="PikachuM_4"
+                geometry={nodes.PikachuM_4.geometry}
+                material={materials["Material.002"]}
+                skeleton={nodes.PikachuM_4.skeleton}
+              />
+            </group>
+            <primitive object={nodes.pm0025_00_pikachu} />
+          </group>
+          <group name="Sun" />
+        </group>
+      </group>
+      <Clone object={nodes.pm0025_00_pikachu} scale={0.03} rotation={[0, 0, 0]} />
+      {/*  <Clone object={nodes.pm0025_00_pikachu} scale={0.04} rotation={[0, 0, 0]}
+        position={[2, 0, 0]} /> */}
 
 
       <Html><button onClick={
